@@ -1,17 +1,6 @@
-// import express from 'express';
+import './bootstrap';
 
-// import routes from './routes';
-
-// const server = express();
-
-// server.use(express.json());
-// server.use(routes);
-
-// export default server;
-
-import 'dotenv/config';
-
-import Youch from 'youch';
+import * as Youch from 'youch';
 import express, { Express } from 'express';
 import 'express-async-errors';
 
