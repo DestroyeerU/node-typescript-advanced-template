@@ -10,10 +10,14 @@ npm-debug.*
 web-build/
 web-report/
 
-.env
-dist/
-
 # macOS
 .DS_Store
 
 *.log
+
+.env
+dist/
+
+# Ignore test-related files
+/coverage.data
+/coverage/
