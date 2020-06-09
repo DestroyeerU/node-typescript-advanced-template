@@ -1,5 +1,7 @@
 import './bootstrap';
 
+import path from 'path';
+
 import * as Youch from 'youch';
 import express, { Express } from 'express';
 import 'express-async-errors';
@@ -19,6 +21,7 @@ class App {
 
   middlewares() {
     this.server.use(express.json());
+    this.server.use('/files', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads')));
   }
 
   routes() {

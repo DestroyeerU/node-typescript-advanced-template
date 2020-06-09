@@ -19,5 +19,5 @@ web-report/
 dist/
 
 # Ignore test-related files
-/coverage.data
-/coverage/
+**/coverage.data
+**/coverage/
