@@ -6,8 +6,6 @@ import 'express-async-errors';
 
 import routes from './routes';
 
-import './database';
-
 class App {
   server: Express;
 
