@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("PRISMA_URL")
+  url = "***"
 }
 
 generator client {
@@ -11,14 +11,14 @@ generator client {
 }
 
 model User {
-  id       Int    @default(autoincrement()) @id
-  name     String
-  email    String @unique
+  id    Int    @default(autoincrement()) @id
+  name  String
+  email String @unique
   password String
 }
 
 model File {
-  id   Int    @default(autoincrement()) @id
-  name String
+  id    Int    @default(autoincrement()) @id
+  name  String
   path String @unique
 }

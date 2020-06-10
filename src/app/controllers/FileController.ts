@@ -7,8 +7,10 @@ class FileController {
     const { originalname: name, filename: path } = req.file;
 
     const file = await prisma.file.create({
-      name,
-      path,
+      data: {
+        name,
+        path,
+      },
     });
 
     return res.json(file);
