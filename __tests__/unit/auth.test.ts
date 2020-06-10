@@ -1,4 +1,4 @@
-import { hashPassword, comparePassword, encodeToken, decodeToken } from '~/app/utils/auth';
+import { hashPassword, comparePassword, encodeToken, decodeToken } from '../../src/app/utils/auth';
 
 describe('Hash String', () => {
   it('should hash a string and compare correctly', async () => {

@@ -6,8 +6,10 @@ import { hashPassword } from '~/app/utils/auth';
 
 import { RequestBody, RequestParamsId, RequestBodyParamsId } from '~/types';
 
-type StoreRequest = RequestBody<User>;
-type UpdateRequest = RequestBodyParamsId<User>;
+type UserRequest = Omit<User, 'id'>;
+
+type StoreRequest = RequestBody<UserRequest>;
+type UpdateRequest = RequestBodyParamsId<UserRequest>;
 
 class UserController {
   async index(req: Request, res: Response) {
