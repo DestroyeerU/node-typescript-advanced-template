@@ -20,14 +20,14 @@ export interface RequestQuery<Q extends ParamsDictionary> extends DefaultRequest
   params: Q;
 }
 
-export interface Request<T, P extends ParamsDictionary, Q extends Query> extends DefaultRequest {
-  body: T;
+export interface Request<B, P extends ParamsDictionary, Q extends Query> extends DefaultRequest {
+  body: B;
   params: P;
   query: Q;
 }
 
-export interface RequestBodyParamsId<T> extends DefaultRequest {
-  body: T;
+export interface RequestBodyParamsId<B> extends DefaultRequest {
+  body: B;
   params: {
     id: string;
   };
