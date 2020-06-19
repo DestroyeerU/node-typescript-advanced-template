@@ -5,7 +5,7 @@ interface ParamsDictionary {
 }
 
 interface Query {
-  [key: string]: string | Query | Array<string | Query>;
+  [key: string]: undefined | string | string[] | Query | Query[];
 }
 
 export interface RequestBody<B> extends DefaultRequest {
