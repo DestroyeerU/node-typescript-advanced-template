@@ -1,8 +1,10 @@
 import supertest from 'supertest';
-import { generateUser } from '../../factory';
 import prisma from '~/prisma';
+
 import App from '~/App';
 import { comparePassword, decodeToken } from '~/app/utils/auth';
+
+import { generateUser } from '../../factory/user';
 
 describe('User store', () => {
   beforeEach(async () => {
@@ -10,7 +12,7 @@ describe('User store', () => {
   });
 
   it('should be able to register', async () => {
-    const user = generateUser();
+    const user = await generateUser();
 
     const response = await supertest(App).post('/users').send(user);
 
@@ -18,7 +20,7 @@ describe('User store', () => {
   });
 
   it('should have a hash passoword', async () => {
-    const user = generateUser({
+    const user = await generateUser({
       password: 'password123',
     });
 
@@ -29,7 +31,7 @@ describe('User store', () => {
   });
 
   it('should not be able to register with invalid email', async () => {
-    const user = generateUser({
+    const user = await generateUser({
       email: 'invalidEmail',
     });
 
@@ -39,11 +41,11 @@ describe('User store', () => {
   });
 
   it('should not be able to register with duplicated email', async () => {
-    const user1 = generateUser({
+    const user1 = await generateUser({
       email: 'testEmail@gmail.com',
     });
 
-    const user2 = generateUser({
+    const user2 = await generateUser({
       email: 'testEmail@gmail.com',
     });
 
@@ -60,8 +62,8 @@ describe('User index', () => {
   });
 
   it('should be able to index all users', async () => {
-    const user1 = generateUser();
-    const user2 = generateUser({ email: 'otherEmail@gmail.com' });
+    const user1 = await generateUser();
+    const user2 = await generateUser({ email: 'otherEmail@gmail.com' });
 
     await supertest(App).post('/users').send(user1);
     await supertest(App).post('/users').send(user2);
@@ -72,7 +74,7 @@ describe('User index', () => {
   });
 
   it('should be able to index one user by id', async () => {
-    const user = generateUser();
+    const user = await generateUser();
 
     const { body: userCreted } = await supertest(App).post('/users').send(user);
 
@@ -83,7 +85,7 @@ describe('User index', () => {
   });
 
   it('should not be able to index one user by invalid id', async () => {
-    const user = generateUser();
+    const user = await generateUser();
 
     const { body: userCreted } = await supertest(App).post('/users').send(user);
 
@@ -93,7 +95,7 @@ describe('User index', () => {
   });
 
   it('should be able to delete one user by id', async () => {
-    const user = generateUser();
+    const user = await generateUser();
 
     const { body: userCreted } = await supertest(App).post('/users').send(user);
 
@@ -104,7 +106,7 @@ describe('User index', () => {
   });
 
   it('should not be able to delete one user by invalid id', async () => {
-    const user = generateUser();
+    const user = await generateUser();
 
     const { body: userCreted } = await supertest(App).post('/users').send(user);
 
@@ -120,7 +122,7 @@ describe('User update', () => {
   });
 
   it('should be able to update fields', async () => {
-    const user = generateUser();
+    const user = await generateUser();
 
     const response = await supertest(App).post('/users').send(user);
     const responseUpdating = await supertest(App).put(`/users/${response.body.id}`).send({
@@ -131,7 +133,7 @@ describe('User update', () => {
   });
 
   it('should not be able to update with invalid email', async () => {
-    const user = generateUser();
+    const user = await generateUser();
 
     const response = await supertest(App).post('/users').send(user);
     const responseUpdating = await supertest(App).put(`/users/${response.body.id}`).send({
@@ -142,7 +144,7 @@ describe('User update', () => {
   });
 
   it('should be able to update your email to the same one', async () => {
-    const user = generateUser({
+    const user = await generateUser({
       email: 'testEmail123@gmail.com',
     });
 
@@ -156,11 +158,11 @@ describe('User update', () => {
   });
 
   it('should not be able to update email that already pertences to other user', async () => {
-    const user1 = generateUser({
+    const user1 = await generateUser({
       email: 'testEmail123@gmail.com',
     });
 
-    const user2 = generateUser({
+    const user2 = await generateUser({
       email: 'otherEmail@gmail.com',
     });
 
@@ -181,7 +183,7 @@ describe('Session store', () => {
   });
 
   it('should authenticate with valid credentials', async () => {
-    const user = generateUser({
+    const user = await generateUser({
       email: 'myEmail@gmail.com',
       password: 'password123',
     });
@@ -197,7 +199,7 @@ describe('Session store', () => {
   });
 
   it('should get JWT token with id encrypted', async () => {
-    const user = generateUser({
+    const user = await generateUser({
       email: 'myEmail@gmail.com',
       password: 'password123',
     });
@@ -233,7 +235,7 @@ describe('Session store', () => {
   });
 
   it('should not authenticate with wrong password', async () => {
-    const user = generateUser({
+    const user = await generateUser({
       email: 'myEmail@gmail.com',
       password: 'password123',
     });
