@@ -8,11 +8,12 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register src/server.ts",
     "dev:debug": "nodemon --inspect src/server.js",
-    "migrate": "dotenv -e .env.test -- npx prisma migrate save -c --experimental;dotenv -e .env.test -- npx prisma migrate up --experimental;npx prisma generate",
-    "migrate:save": "dotenv -e .env.test -- prisma migrate save -c --experimental",
-    "migrate:up": "dotenv -e .env.test -- prisma migrate up --experimental",
-    "migrate:reset": "dotenv -e .env.test -- prisma migrate down `20200610103043-create-users` --experimental",
-    "generate": "dotenv -e .env.test -- prisma generate --experimental",
+    "migrate": "dotenv -e .env -- npx prisma migrate save -c --experimental;dotenv -e .env -- npx prisma migrate up --experimental;npx prisma generate",
+    "migrate:save": "dotenv -e .env -- prisma migrate save -c --experimental",
+    "migrate:up": "dotenv -e .env -- prisma migrate up --experimental",
+    "migrate:reset": "dotenv -e .env -- prisma migrate down `20200610103043-create-users` --experimental",
+    "generate": "dotenv -e .env -- prisma generate --experimental",
+
     "pretest": "dotenv -e .env.test -- prisma migrate up -c --experimental;dotenv -e .env.test -- prisma generate",
     "test": "NODE_ENV=test dotenv -e .env.test -- jest",
     "posttest": "dotenv -e .env.test -- prisma migrate down `20200610103043-create-users` --experimental"
