@@ -6,6 +6,7 @@
   "author": "DestroyeerU <destroyeeru18@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "babel src --extensions .js,.ts --out-dir dist --copy-files --no-copy-ignored",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --no-notify --ignore-watch node_modules src/server.ts",
     "dev:debug": "nodemon --inspect src/server.js",
     "migrate:save": "dotenv -e .env -- prisma migrate save -c --experimental",
@@ -19,7 +20,9 @@
     "test": "NODE_ENV=test dotenv -e .env.test -- jest"
   },
   "dependencies": {
+    "@babel/node": "^7.10.4",
     "@prisma/client": "^2.0.0-beta.7",
+    "babel-plugin-module-resolver": "^4.0.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "dotenv-cli": "^3.2.0",
@@ -34,9 +37,10 @@
     "yup": "^0.29.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
-    "@babel/preset-typescript": "^7.9.0",
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "@prisma/cli": "^2.0.0-beta.7",
     "@sucrase/jest-plugin": "^2.0.0",
     "@types/bcryptjs": "^2.4.2",
