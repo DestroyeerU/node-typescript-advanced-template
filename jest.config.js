@@ -1,5 +1,7 @@
+
+
 const { compilerOptions } = require('./tsconfig.json');
-const { pathsToModuleNameMapper } = require('ts-jest');
+const { pathsToModuleNameMapper } = require('ts-jest/utils');
 
 module.exports = {
   // All imported modules in your tests should be mocked automatically
@@ -74,9 +76,7 @@ module.exports = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  moduleNameMapper: {
-    '^~(.*)$': '<rootDir>/src/$1',
-  },
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {  prefix: '<rootDir>' }),
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -88,7 +88,7 @@ module.exports = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  // preset: undefined,
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -184,3 +184,5 @@ module.exports = {
   // Whether to use watchman for file crawling
   // watchman: true,
 };
+
+
