@@ -1,8 +1,9 @@
 import supertest from 'supertest';
-import prisma from '~/prisma';
+
+import { comparePassword, decodeToken } from '~/app/utils/auth';
 
 import App from '~/App';
-import { comparePassword, decodeToken } from '~/app/utils/auth';
+import prisma from '~/prisma';
 
 import { generateUser } from '../../factory/user';
 

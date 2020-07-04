@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 
-import prisma from '~/prisma';
 import { comparePassword, encodeToken } from '~/app/utils/auth';
+
+import prisma from '~/prisma';
 
 interface StoreRequest extends Request {
   body: {

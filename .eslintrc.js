@@ -11,7 +11,7 @@ module.exports = {
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
   ],
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'import-helpers'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -36,18 +36,13 @@ module.exports = {
 
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/camelcase': 'off',
 
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
         argsIgnorePattern: '_',
-      },
-    ],
-    '@typescript-eslint/explicit-module-boundary-types': [
-      'warn',
-      {
-        allowArgumentsExplicitlyTypedAsAny: true,
       },
     ],
 
@@ -57,6 +52,22 @@ module.exports = {
       {
         ts: 'never',
         js: 'never',
+      },
+    ],
+    'import-helpers/order-imports': [
+      'warn',
+      {
+        newlinesBetween: 'always', // new line between groups
+        groups: [
+          '/^express/',
+          'module',
+          '/^~/app/',
+          '/^~/config/',
+          '/^~/types/',
+          '/^~/',
+          ['parent', 'sibling', 'index'],
+        ],
+        alphabetize: { order: 'asc', ignoreCase: true },
       },
     ],
   },

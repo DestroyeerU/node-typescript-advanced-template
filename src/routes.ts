@@ -1,16 +1,15 @@
 import { Router } from 'express';
-import multer from 'multer';
 
-import multerConfig from '~/config/muter';
+import multer from 'multer';
 
 import FileController from '~/app/controllers/FileController';
 import SessionController from '~/app/controllers/Users/SessionController';
-import UserController from './app/controllers/Users/UserController';
-
+import UserController from '~/app/controllers/Users/UserController';
+import * as GlobalValidations from '~/app/validations/';
 import * as SessionValidations from '~/app/validations/User/session';
 import * as UserValidations from '~/app/validations/User/user';
 
-import * as GlobalValidations from '~/app/validations/';
+import multerConfig from '~/config/muter';
 
 const routes = Router();
 const upload = multer(multerConfig);

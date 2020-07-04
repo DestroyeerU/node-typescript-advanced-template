@@ -1,12 +1,12 @@
 import { User } from '@prisma/client';
-import supertest from 'supertest';
 import faker from 'faker';
+import supertest from 'supertest';
 
-import prisma from '~/prisma';
 import { encodeToken } from '~/app/utils/auth';
 
-import { createUser } from '../../factory/user';
+import prisma from '~/prisma';
 
+import { createUser } from '../../factory/user';
 import { UseAutorization, Autorizations, Token, MakeRequest } from './types';
 
 export function useAuthorization({ key }: UseAutorization) {
