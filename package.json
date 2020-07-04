@@ -9,13 +9,13 @@
     "build": "babel src --extensions .js,.ts --out-dir dist --copy-files --no-copy-ignored",
     "start": "node ./dist/server.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --no-notify --ignore-watch node_modules src/server.ts",
-    "migrate:save": "dotenv -e .env -- prisma migrate save -c --experimental",
-    "migrate:up": "dotenv -e .env -- prisma migrate up --experimental",
-    "migrate:generate": "dotenv -e .env -- prisma generate",
+
     "migrate:reset": "dotenv -e .env -- prisma migrate down `20200610103043-create-users` --experimental",
-    "migrate": "yarn migrate:save && yarn migrate:up && yarn migrate:generate",
     "migrate:reset:test": "dotenv -e .env.test -- prisma migrate down `20200610103043-create-users` --experimental",
+
+    "migrate": "dotenv -e .env -- prisma migrate save -c --experimental && dotenv -e .env -- prisma migrate up --experimental && dotenv -e .env -- prisma generate",
     "migrate:test": "dotenv -e .env.test -- prisma migrate save -c --experimental && dotenv -e .env.test -- prisma migrate up --experimental && dotenv -e .env.test -- prisma generate",
+
     "pretest": "yarn migrate:reset:test && yarn migrate:test",
     "test": "NODE_ENV=test dotenv -e .env.test -- jest"
   },
