@@ -5,6 +5,9 @@ import multer from 'multer';
 import FileController from '~/app/controllers/FileController';
 import SessionController from '~/app/controllers/Users/SessionController';
 import UserController from '~/app/controllers/Users/UserController';
+
+import authMiddleware from '~/app/middlewares/auth';
+
 import * as GlobalValidations from '~/app/validations/';
 import * as SessionValidations from '~/app/validations/User/session';
 import * as UserValidations from '~/app/validations/User/user';
@@ -23,5 +26,11 @@ routes.put('/users/:id', GlobalValidations.validateParamsId, UserValidations.val
 routes.delete('/users/:id', GlobalValidations.validateParamsId, UserController.delete);
 
 routes.post('/files', upload.single('file'), FileController.store);
+
+routes.use(authMiddleware);
+
+routes.get('/testAuth', async (req, res) => {
+  return res.json({ message: 'You are authenticated!' });
+});
 
 export default routes;

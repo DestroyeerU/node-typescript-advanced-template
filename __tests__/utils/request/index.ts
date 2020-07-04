@@ -55,6 +55,9 @@ export function Request(App: unknown, useAutorization?: UseAutorization) {
 
   async function getToken(tokenState?: Token) {
     if (tokenState?.token) {
+      console.log('aki');
+      console.log(tokenState.token);
+
       return tokenState.token;
     }
 

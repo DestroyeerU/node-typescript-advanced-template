@@ -61,6 +61,11 @@ module.exports = {
         groups: [
           '/^express/',
           'module',
+          '/^~/app/controllers/',
+          '/^~/app/middlewares/',
+          '/^~/app/validations/',
+          '/^~/app/schemas/',
+          '/^~/app/utils/',
           '/^~/app/',
           '/^~/config/',
           '/^~/types/',

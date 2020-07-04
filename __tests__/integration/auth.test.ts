@@ -1,11 +1,14 @@
 import supertest from 'supertest';
 
-import { comparePassword, decodeToken } from '~/app/utils/auth';
+import { comparePassword, decodeToken, encodeToken } from '~/app/utils/auth';
 
 import App from '~/App';
 import prisma from '~/prisma';
 
-import { generateUser } from '../../factory/user';
+import { generateUser } from '../factory/user';
+import { Request, useAuthorization } from '../utils/request';
+
+const authRequest = Request(App);
 
 describe('User store', () => {
   beforeEach(async () => {
@@ -246,6 +249,45 @@ describe('Session store', () => {
     const response = await supertest(App).post('/session').send({
       email: user.email,
       password: 'wrongPassword',
+    });
+
+    expect(response.status).toBe(401);
+  });
+});
+
+describe('Access private routes', () => {
+  it('should access private routes when authenticated', async () => {
+    const response = await authRequest.makeRequest({
+      method: 'get',
+      path: '/testAuth',
+    });
+
+    expect(response.status).toBe(200);
+  });
+
+  it('should not access private routes without token', async () => {
+    const response = await supertest(App).get('/authTest');
+
+    expect(response.status).toBe(400);
+  });
+
+  it('should not access private routes with invalid token', async () => {
+    const response = await authRequest.makeRequest({
+      method: 'get',
+      path: '/testAuth',
+      tokenState: { token: 'invalidToken' },
+    });
+
+    expect(response.status).toBe(400);
+  });
+
+  it('should not access private routes with token that contains id where user not exists', async () => {
+    const token = encodeToken({ id: 0 });
+
+    const response = await authRequest.makeRequest({
+      method: 'get',
+      path: '/testAuth',
+      tokenState: { token },
     });
 
     expect(response.status).toBe(401);

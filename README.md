@@ -25,8 +25,8 @@
 ## TO-DO
 
 - [ ] Finish tests<br/>
-- [ ] Assert User exists on auth middleware<br/>
 - [ ] Setup Exception handler on App.ts<br/>
+- [x] Assert User exists on auth middleware<br/>
 - [x] Setup import helpers<br/>
 - [x] Setup Eslint/ImportHelpers<br/>
 - [x] Global types for auth middleware<br/>
