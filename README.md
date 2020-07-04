@@ -31,7 +31,7 @@
 - [x] Setup Eslint/ImportHelpers<br/>
 - [x] Global types for auth middleware<br/>
 
-## Possíveis atualizações
+## Possible Updates
 
 - [ ] Background taks<br/>
 - [ ] Envio de email<br/>
