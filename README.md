@@ -26,6 +26,9 @@
 
 - [ ] Finish tests<br/>
 - [ ] Assert User exists on auth middleware<br/>
+- [ ] Setup import helpers<br/>
+- [ ] Setup Eslint/ImportHelpers<br/>
+- [ ] Setup Exception handler on App.ts<br/>
 - [x] Global types for auth middleware<br/>
 
 ## Possíveis atualizações

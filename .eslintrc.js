@@ -8,11 +8,10 @@ module.exports = {
     'airbnb-base',
     'plugin:@typescript-eslint/recommended',
 
-    'prettier',
     'prettier/@typescript-eslint',
-    // "plugin:prettier/recommended",
+    'plugin:prettier/recommended',
   ],
-  plugins: ['prettier'],
+  plugins: ['@typescript-eslint', 'prettier'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -22,16 +21,36 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'prettier/prettier': 'error',
-    'class-methods-use-this': 'off',
+    'no-new': 'off',
+    'no-prototype-builtins': 'off',
+    'no-restricted-syntax': 'off',
+    'no-useless-constructor': 'off',
     'no-param-reassign': 'off',
-    camelcase: 'off',
-    'no-unused-vars': [
+    'no-underscore-dangle': 'off',
+
+    'max-classes-per-file': 'off',
+    'class-methods-use-this': 'off',
+
+    'import/prefer-default-export': 'off',
+    'prettier/prettier': 'error',
+
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-member-accessibility': 'off',
+    '@typescript-eslint/camelcase': 'off',
+
+    '@typescript-eslint/no-unused-vars': [
       'error',
       {
-        argsIgnorePatterns: 'next',
+        argsIgnorePattern: '_',
       },
     ],
+    '@typescript-eslint/explicit-module-boundary-types': [
+      'warn',
+      {
+        allowArgumentsExplicitlyTypedAsAny: true,
+      },
+    ],
+
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -40,13 +59,6 @@ module.exports = {
         js: 'never',
       },
     ],
-
-    'import/prefer-default-export': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-member-accessibility': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-
-    'no-underscore-dangle': 'off',
   },
   settings: {
     'import/parsers': {
