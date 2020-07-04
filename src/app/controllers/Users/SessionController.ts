@@ -1,15 +1,17 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
 import { comparePassword, encodeToken } from '~/app/utils/auth';
 
+import { RequestBody } from '~/types';
+
 import prisma from '~/prisma';
 
-interface StoreRequest extends Request {
-  body: {
-    email: string;
-    password: string;
-  };
+interface StoreBody {
+  email: string;
+  password: string;
 }
+
+type StoreRequest = RequestBody<StoreBody>;
 
 class SessionController {
   async store(req: StoreRequest, res: Response) {
