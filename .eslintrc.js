@@ -6,12 +6,13 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
-    'plugin:@typescript-eslint/recommended',
 
     'prettier/@typescript-eslint',
+
     'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
-  plugins: ['@typescript-eslint', 'prettier', 'import-helpers'],
+  plugins: ['@typescript-eslint', 'import-helpers', 'prettier'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',

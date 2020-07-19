@@ -6,7 +6,7 @@ import App from '~/App';
 import prisma from '~/prisma';
 
 import { generateUser } from '../factory/user';
-import { Request, useAuthorization } from '../utils/request';
+import { Request } from '../utils/request';
 
 const authRequest = Request(App);
 
