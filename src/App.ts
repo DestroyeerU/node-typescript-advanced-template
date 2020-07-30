@@ -3,7 +3,6 @@ import './bootstrap';
 import express, { Express } from 'express';
 
 import path from 'path';
-import 'express-async-errors';
 
 import routes from './routes';
 
