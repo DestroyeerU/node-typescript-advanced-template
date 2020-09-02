@@ -1,14 +1,12 @@
 import supertest from 'supertest';
 
-import { decodeToken, encodeToken } from '@utils/auth';
+import { decodeToken } from '@utils/auth';
 
 import App from '@/App';
 import prisma from '@/services/prisma';
 
-import { generateUser } from '../factory/user';
-import { Request } from '../utils/request';
-
-const authRequest = Request(App);
+import { createToken } from '../factory/auth';
+import { createUser } from '../factory/user';
 
 describe('Session store', () => {
   beforeEach(async () => {
@@ -16,39 +14,33 @@ describe('Session store', () => {
   });
 
   it('should authenticate with valid credentials', async () => {
-    const user = await generateUser({
+    const { email } = await createUser({
       email: 'myEmail@gmail.com',
       password: 'password123',
     });
 
-    await supertest(App).post('/users').send(user);
-
     const response = await supertest(App).post('/sessions').send({
-      email: user.email,
-      password: user.password,
+      email,
+      password: 'password123',
     });
-
-    console.log(response.body);
 
     expect(response.status).toBe(200);
   });
 
   it('should get JWT token with id encrypted', async () => {
-    const user = await generateUser({
+    const { id, email } = await createUser({
       email: 'myEmail@gmail.com',
       password: 'password123',
     });
 
-    const userResponse = await supertest(App).post('/users').send(user);
-
     const response = await supertest(App).post('/sessions').send({
-      email: user.email,
-      password: user.password,
+      email,
+      password: 'password123',
     });
 
     const decodedToken = await decodeToken(response.body.token);
 
-    expect(decodedToken?.id).toBe(userResponse.body.id);
+    expect(decodedToken?.id).toBe(id);
   });
 
   it('should not authenticate with invalid email format', async () => {
@@ -70,15 +62,13 @@ describe('Session store', () => {
   });
 
   it('should not authenticate with wrong password', async () => {
-    const user = await generateUser({
+    const { email } = await createUser({
       email: 'myEmail@gmail.com',
       password: 'password123',
     });
 
-    await supertest(App).post('/users').send(user);
-
     const response = await supertest(App).post('/sessions').send({
-      email: user.email,
+      email,
       password: 'wrongPassword',
     });
 
@@ -88,9 +78,10 @@ describe('Session store', () => {
 
 describe('Access private routes', () => {
   it('should access private routes when authenticated', async () => {
-    const response = await authRequest.makeRequest({
-      method: 'get',
-      path: '/testAuth',
+    const token = await createToken();
+
+    const response = await supertest(App).get('/testAuth').set({
+      authorization: token,
     });
 
     expect(response.status).toBe(200);
@@ -103,22 +94,18 @@ describe('Access private routes', () => {
   });
 
   it('should not access private routes with invalid token', async () => {
-    const response = await authRequest.makeRequest({
-      method: 'get',
-      path: '/testAuth',
-      tokenState: { token: 'invalidToken' },
+    const response = await supertest(App).get('/testAuth').set({
+      authorization: 'invalidToken',
     });
 
     expect(response.status).toBe(400);
   });
 
   it('should not access private routes with token that contains id where user not exists', async () => {
-    const token = encodeToken({ id: 0 });
+    const token = await createToken({ id: -1 });
 
-    const response = await authRequest.makeRequest({
-      method: 'get',
-      path: '/testAuth',
-      tokenState: { token },
+    const response = await supertest(App).get('/testAuth').set({
+      authorization: token,
     });
 
     expect(response.status).toBe(401);

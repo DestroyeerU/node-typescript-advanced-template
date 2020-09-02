@@ -36,7 +36,8 @@ export async function generateUser(params?: FactoryUser, encodePassword?: boolea
 }
 
 export async function createUser(params?: FactoryUser, encodePassword?: boolean) {
-  const userData = await generateUser(params, encodePassword);
+  const shouldEncodePassword = encodePassword === undefined ? true : encodePassword;
+  const userData = await generateUser(params, shouldEncodePassword);
 
   return prisma.user.create({
     data: userData,
