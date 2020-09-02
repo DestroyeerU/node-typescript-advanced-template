@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import prisma from '~/prisma';
+import prisma from '@services/prisma';
 
 class FileController {
   async store(req: Request, res: Response) {

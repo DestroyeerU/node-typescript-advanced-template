@@ -1,9 +1,9 @@
 import supertest from 'supertest';
 
-import { comparePassword, decodeToken, encodeToken } from '~/app/utils/auth';
+import { comparePassword, decodeToken, encodeToken } from '@utils/auth';
 
-import App from '~/App';
-import prisma from '~/prisma';
+import App from '@/App';
+import prisma from '@/services/prisma';
 
 import { generateUser } from '../factory/user';
 import { Request } from '../utils/request';
@@ -194,10 +194,12 @@ describe('Session store', () => {
 
     await supertest(App).post('/users').send(user);
 
-    const response = await supertest(App).post('/session').send({
+    const response = await supertest(App).post('/sessions').send({
       email: user.email,
       password: user.password,
     });
+
+    console.log(response.body);
 
     expect(response.status).toBe(200);
   });
@@ -210,7 +212,7 @@ describe('Session store', () => {
 
     const userResponse = await supertest(App).post('/users').send(user);
 
-    const response = await supertest(App).post('/session').send({
+    const response = await supertest(App).post('/sessions').send({
       email: user.email,
       password: user.password,
     });
@@ -221,7 +223,7 @@ describe('Session store', () => {
   });
 
   it('should not authenticate with invalid email format', async () => {
-    const response = await supertest(App).post('/session').send({
+    const response = await supertest(App).post('/sessions').send({
       email: 'invalidEmail',
       password: 'pass123',
     });
@@ -230,7 +232,7 @@ describe('Session store', () => {
   });
 
   it('should not authenticate with email that does not exists', async () => {
-    const response = await supertest(App).post('/session').send({
+    const response = await supertest(App).post('/sessions').send({
       email: 'nonUserEmail@gmail.com',
       password: 'pass123',
     });
@@ -246,7 +248,7 @@ describe('Session store', () => {
 
     await supertest(App).post('/users').send(user);
 
-    const response = await supertest(App).post('/session').send({
+    const response = await supertest(App).post('/sessions').send({
       email: user.email,
       password: 'wrongPassword',
     });

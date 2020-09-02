@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import * as Yup from 'yup';
 
-import { validateSchema } from '~/app/utils/yup';
+import { validateSchema } from '@utils/yup';
 
 const StoreSchema = Yup.object().shape({
   name: Yup.string().required(),

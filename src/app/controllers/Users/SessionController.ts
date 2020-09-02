@@ -1,10 +1,10 @@
 import { Response } from 'express';
 
-import { comparePassword, encodeToken } from '~/app/utils/auth';
+import { RequestBody } from '@types';
 
-import { RequestBody } from '~/types';
+import prisma from '@services/prisma';
 
-import prisma from '~/prisma';
+import { comparePassword, encodeToken } from '@utils/auth';
 
 interface StoreBody {
   email: string;

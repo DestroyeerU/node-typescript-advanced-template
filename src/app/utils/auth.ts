@@ -2,7 +2,7 @@ import * as bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 
-import authConfig from '~/config/auth';
+import authConfig from '@config/auth';
 
 interface TokenObject {
   id: number;

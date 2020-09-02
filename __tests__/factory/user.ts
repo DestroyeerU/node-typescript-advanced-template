@@ -1,8 +1,8 @@
 import faker from 'faker';
 
-import { hashPassword } from '~/app/utils/auth';
+import prisma from '@services/prisma';
 
-import prisma from '~/prisma';
+import { hashPassword } from '@utils/auth';
 
 export interface FactoryUser {
   name?: string;

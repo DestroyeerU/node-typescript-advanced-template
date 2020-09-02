@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 
+import { RequestBody, RequestParamsId, RequestBodyParamsId } from '@types';
+
+import prisma from '@services/prisma';
+
+import { hashPassword } from '@utils/auth';
+
 import { User } from '@prisma/client';
-
-import { hashPassword } from '~/app/utils/auth';
-
-import { RequestBody, RequestParamsId, RequestBodyParamsId } from '~/types';
-
-import prisma from '~/prisma';
 
 type UserRequest = Omit<User, 'id'>;
 

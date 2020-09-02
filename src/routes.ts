@@ -2,22 +2,22 @@ import { Router } from 'express';
 
 import multer from 'multer';
 
-import FileController from '~/app/controllers/FileController';
-import SessionController from '~/app/controllers/Users/SessionController';
-import UserController from '~/app/controllers/Users/UserController';
+import FileController from '@controllers/FileController';
+import SessionController from '@controllers/Users/SessionController';
+import UserController from '@controllers/Users/UserController';
 
-import authMiddleware from '~/app/middlewares/auth';
+import authMiddleware from '@middlewares/auth';
 
-import * as GlobalValidations from '~/app/validations/';
-import * as SessionValidations from '~/app/validations/User/session';
-import * as UserValidations from '~/app/validations/User/user';
+import * as GlobalValidations from '@validations/index';
+import * as SessionValidations from '@validations/User/session';
+import * as UserValidations from '@validations/User/user';
 
-import multerConfig from '~/config/muter';
+import multerConfig from '@config/muter';
 
 const routes = Router();
 const upload = multer(multerConfig);
 
-routes.post('/session', SessionValidations.validateStore, SessionController.store);
+routes.post('/sessions', SessionValidations.validateStore, SessionController.store);
 
 routes.get('/users', UserController.index);
 routes.get('/users/:id', GlobalValidations.validateParamsId, UserController.show);

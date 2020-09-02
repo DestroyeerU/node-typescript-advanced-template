@@ -1,10 +1,11 @@
-import { User } from '@prisma/client';
 import faker from 'faker';
 import supertest from 'supertest';
 
-import { encodeToken } from '~/app/utils/auth';
+import prisma from '@services/prisma';
 
-import prisma from '~/prisma';
+import { encodeToken } from '@utils/auth';
+
+import { User } from '@prisma/client';
 
 import { createUser } from '../../factory/user';
 import { UseAutorization, Autorizations, Token, MakeRequest } from './types';
@@ -55,9 +56,6 @@ export function Request(App: unknown, useAutorization?: UseAutorization) {
 
   async function getToken(tokenState?: Token) {
     if (tokenState?.token) {
-      console.log('aki');
-      console.log(tokenState.token);
-
       return tokenState.token;
     }
 
