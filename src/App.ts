@@ -2,11 +2,7 @@ import './bootstrap';
 
 import express, { Express } from 'express';
 
-import path from 'path';
-
 import routes from './routes';
-
-const uploadUrl = path.resolve(__dirname, '..', 'tmp', 'uploads');
 
 class App {
   server: Express;
@@ -21,7 +17,6 @@ class App {
 
   middlewares() {
     this.server.use(express.json());
-    this.server.use('/files', express.static(uploadUrl));
   }
 
   routes() {

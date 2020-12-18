@@ -1,6 +1,5 @@
 import * as bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { promisify } from 'util';
 
 import authConfig from '@config/auth';
 
@@ -24,7 +23,8 @@ export function encodeToken(objectToEncode: TokenObject) {
 
 export async function decodeToken(token: string) {
   try {
-    const tokenDecoded = await promisify(jwt.verify)(token, authConfig.appSecret);
+    const tokenDecoded = jwt.verify(token, authConfig.appSecret);
+    // const tokenDecoded = await promisify(jwt.verify)(token, authConfig.appSecret);
 
     return tokenDecoded as TokenObject;
   } catch (err) {

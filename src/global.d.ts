@@ -1,7 +1,8 @@
-type PrismaClient = import('@prisma/client').PrismaClient;
+// wrong: import { PackageType } from "library";
+// correct: type PackageType = import('library').PackageType;
 
 declare namespace NodeJS {
-  export interface Global {
-    prisma?: PrismaClient;
-  }
+  // export interface Global {
+  // put here global types
+  // }
 }

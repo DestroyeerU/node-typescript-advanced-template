@@ -20,10 +20,9 @@ sudo docker run --name mongoDatabase -p 27017:27017 -d -t mongo
 
 ## Features
 
-- **Pre Code Made**
+- **Pre Setup Made**
   - JWT Authentication
   - Yup validation
-  - Files Upload
   - Tests with Jests
 
 - **Code Formatter**
@@ -31,28 +30,3 @@ sudo docker run --name mongoDatabase -p 27017:27017 -d -t mongo
   - Prettier
   - Module import `@`
   - Import Helpers
-
-- **Tests with Jest**
-  - User and Session CRUD tests
-  - Access private routes
-  - Auth unit tests
-  - Factory with Faker
-
-- **Prisma**
-  - Env variables
-  - User model example
-  - File model for files upload
-
-## TO-DO
-
-- [ ] Finish tests<br/>
-- [ ] Setup Exception handler on App.ts<br/>
-- [x] Assert User exists on auth middleware<br/>
-- [x] Setup import helpers<br/>
-- [x] Setup Eslint/ImportHelpers<br/>
-- [x] Global types for auth middleware<br/>
-
-## Possible Updates
-
-- [ ] Background taks<br/>
-- [ ] Envio de email<br/>
