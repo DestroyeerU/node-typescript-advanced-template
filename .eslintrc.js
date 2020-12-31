@@ -79,7 +79,7 @@ module.exports = {
   },
   settings: {
     'import/parsers': {
-      '@typescript-eslint/parser': ['.ts'],
+      '@typescript-eslint/parser': ['*.ts'],
     },
     'import/resolver': {
       typescript: {},
