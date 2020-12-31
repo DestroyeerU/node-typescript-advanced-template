@@ -1,20 +1,9 @@
-import * as bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import authConfig from '@config/auth';
 
 interface TokenObject {
   id: number;
-}
-
-const rounds = 8;
-
-export async function hashPassword(password: string) {
-  return bcrypt.hash(password, rounds);
-}
-
-export async function comparePassword(password: string, hashedPassword: string) {
-  return bcrypt.compare(password, hashedPassword);
 }
 
 export function encodeToken(objectToEncode: TokenObject) {
